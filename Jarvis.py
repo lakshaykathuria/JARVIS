@@ -81,8 +81,8 @@ def google(query):
     query = query.replace("Please","")
 
     results = pywhatkit.search(query)
-    print(results)
-    speak(results)
+#     print(results)
+#     speak(results)
     
 def youtube(query):
     # global query 
