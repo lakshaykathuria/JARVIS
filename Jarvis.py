@@ -77,6 +77,7 @@ def google(query):
     speak("searching....")
     query = query.replace("on Google","")
     query = query.replace("search the","")
+    query = query.replace("search","")
     query = query.replace("Google","")
     query = query.replace("Please","")
 
