@@ -62,7 +62,7 @@ def takecommand():
             return True
                 
 
-def wikipedia(query):
+def wiki(query):
     # global query 
     # query = takecommand()
     speak("searching....")
@@ -97,7 +97,7 @@ wishMe()
 query = takecommand() 
 if 'YouTube' in query:
     youtube(query)
-elif 'Google'or 'google' in query:
+elif 'Google' in query:
     google(query)
-elif 'wikipedia'or 'Wikipedia' in query:
-    wikipedia(query)
+elif 'Wikipedia' in query:
+    wiki(query)
