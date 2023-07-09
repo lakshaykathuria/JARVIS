@@ -3,7 +3,6 @@ import speech_recognition as sr
 from datetime import datetime
 import pywhatkit
 import wikipedia
-# from google import search
 
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
@@ -26,25 +25,7 @@ def wishMe():
     print("I am Jarvis, Sir Plz tell me how may i help you")
     speak("I am Jarvis, Sir Plz tell me how may i help you")
 
-# def authorised():
-#     r = sr.Recognizer()
-#     with sr.Microphone() as source:
-#         print("Listening....")
-#         audio = r.listen(source)
-#         r.pause_threshold = 1
-#         command = r.recognize_google(audio, language="en-in" )
-#         # recognising audio form person
-
-#         if 'Jarvis' in command:
-#             print("Recognizing...")
-#             wishMe()
-#         else:
-#             speak("Sorry You Are not Authorised person")
-#             exit
-#         return command
         
-    
-
 def takecommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -63,8 +44,7 @@ def takecommand():
                 
 
 def wiki(query):
-    # global query 
-    # query = takecommand()
+    
     speak("searching....")
     query = query.replace("wikipedia","")
     results = wikipedia.search(query)
@@ -72,8 +52,7 @@ def wiki(query):
     speak(results)
 
 def google(query):
-    # global query 
-    # query = takecommand()
+   
     speak("searching....")
     query = query.replace("on Google","")
     query = query.replace("search the","")
@@ -82,12 +61,9 @@ def google(query):
     query = query.replace("Please","")
 
     results = pywhatkit.search(query)
-#     print(results)
-#     speak(results)
-    
+
 def youtube(query):
-    # global query 
-    # query = takecommand()
+    
     speak("Opening Youtube")
     query = query.replace("on youtube","")
     query = query.replace("play","")
