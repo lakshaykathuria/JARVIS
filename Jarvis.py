@@ -33,8 +33,8 @@ def takecommand():
             
         except Exception as e:
             print("Please Say That Again")
-            takecommand()
-            return ''
+            return takecommand()
+            
                 
 def wishMe():
     hour = int(datetime.now().hour)
@@ -46,8 +46,8 @@ def wishMe():
 
     elif hour >= 16 or hour < 6:
         speak("Good Evening ")
-    print("I am Jarvis, Plz tell me how may i help you")
-    speak("I am Jarvis, Plz tell me how may i help you")
+    print("I am Jarvis, Please tell me how may i help you")
+    speak("I am Jarvis, Please tell me how may i help you")
 
 
 def google(query):
@@ -89,7 +89,7 @@ def jarvis():
         
         if query:
             query = query.replace("jarvis",'')
-            
+
             if 'play' in query:
                 youtube(query)
                 speak('playing')
