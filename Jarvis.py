@@ -103,7 +103,7 @@ def stop():
 
 
 def send_whatsapp_message():
-    speak("please Enter the recipient's phone number with country code")
+    speak("please Enter the recipient's phone number")
     pyautogui.click(x=900, y=900)
     recipient = takecommand()
     speak('Enter the message you want to send: ')
@@ -204,7 +204,7 @@ def jarvis():
                 send_whatsapp_message()
                 
 
-            elif 'bye' in query or 'exit' in query:
+            elif 'bye' in query or 'exit' in query or 'stop' in query:
                 break
             else:
                 chatgpt(query)
