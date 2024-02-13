@@ -9,6 +9,7 @@ import  os
 from openai import OpenAI
 from AppOpener import open
 from AppOpener import close
+import subprocess
 
 
 engine = pyttsx3.init()
@@ -58,16 +59,16 @@ def today():
     day = today.strftime("%A")
     date = today.strftime("%B %d, %Y")
     print("Today is :",day + " , " + date )
-    speak("Today is :",day + " , " + date )
+    speak(f"Today is : {day},  {date}")
 
 
 def google(query):
     speak("searching....")
-    query = query.replace("on Google","")
+    query = query.replace("on google","")
     query = query.replace("search the","")
     query = query.replace("search","")
-    query = query.replace("Google","")
-    query = query.replace("Please","")
+    query = query.replace("google","")
+    query = query.replace("please","")
 
     results = pywhatkit.search(query)
 
@@ -92,31 +93,43 @@ def chatgpt(query):
     speak(completion.choices[0].message.content)
 
 def  shutdown():
-    os.system('shutdown /s /f')
+    os.system('shutdown /s /f /t 1')
 
 def  restart():
-    os.system('restart /r /t 1')
+    os.system('shutdown /r /t 1')
 
-def sleep():
-    os.system('powercfg /hibernate off')
+def stop():
+    pyautogui.hotkey('alt', 'f4')
+
 
 def send_whatsapp_message():
     speak("please Enter the recipient's phone number with country code")
     pyautogui.click(x=900, y=900)
-    recipient = input("Enter the recipient's phone number with country code: ")
+    recipient = takecommand()
     speak('Enter the message you want to send: ')
-    message = input("Enter the message you want to send: ")
+    message = takecommand()
     open('whatsapp')
-    time.sleep(4)
+    time.sleep(2)
     pyautogui.click(x=200, y=155)
     pyautogui.typewrite(recipient)
-    time.sleep(3)
+    time.sleep(2)
     pyautogui.click(x=250, y=250)
     time.sleep(2)
     pyautogui.typewrite(message)
     pyautogui.press('enter')
     print("Message sent successfully!")
     speak("Message sent successfully!")
+
+def updates():
+    subprocess.run(['control', '/name', 'Microsoft.WindowsUpdate'])
+    time.sleep(2)
+    pyautogui.click(x=1700, y=200)
+
+def note():
+    open('notepad')
+    speak('what do you wanna note')
+    topic = takecommand()
+    pyautogui.typewrite(topic)
     
 def jarvis():
     while True:
@@ -128,13 +141,20 @@ def jarvis():
             if 'play' in query:
                 youtube(query)
                 speak('playing')
-                break
-
+                
+            elif 'close youtube' in query:
+                stop()
 
             elif 'google' in query or 'search' in query:
                 google(query)
-                break
+                
+            elif 'close google' in query:
+                stop()
 
+
+            elif 'yourself' in query:
+                print("I'm an artificial intelligence developed by Lakshay called JARVIS. My purpose is to assist and engage in conversation with users like you.")
+                speak("I'm an artificial intelligence developed by Lakshay called JARVIS. My purpose is to assist and engage in conversation with users like you.")
 
             elif 'open whatsapp' in query or 'open the whatsapp' in query:
                 open("whatsapp")
@@ -148,25 +168,43 @@ def jarvis():
                 close("telegram")
 
             
-            elif 'calculator' in query:
+            elif 'open calculator' in query:
                 open('calculator')
-                break
+            elif'close calculator' in query:
+                stop()
+
+            elif 'open settings' in query:
+                open('settings')
+            elif 'close setting' in query:
+                stop()
+
+            elif 'close notepad' in query:
+                stop()
+            elif 'note' in query:
+                note()
 
             elif 'time' in query:
                 currenttime()
+            elif 'shutdown' in query:
+                shutdown()
+                break
+            elif  'restart' in query:
+                restart()
+                break
+            elif 'update' in query or  'updates' in query:
+                updates()
+
+            elif 'close update' in query or 'stop updating' in query:
+                stop()
+
             elif 'date' in query or 'day' in query:
                 today()
-            elif 'shutdown ' in query:
-                shutdown()
-            elif  'restart ' in query:
-                restart()
-
 
             elif 'send message' in query or 'send a message' in query or 'send a message on whatsapp'in query:
                 send_whatsapp_message()
-                break
+                
 
-            elif 'bye' in query:
+            elif 'bye' in query or 'exit' in query:
                 break
             else:
                 chatgpt(query)
