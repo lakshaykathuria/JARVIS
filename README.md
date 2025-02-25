@@ -48,7 +48,5 @@ Here are some example commands you can use:
 ## Author
 Developed by Lakshay
 
----
 
-**Filename:** `README.md`
 
